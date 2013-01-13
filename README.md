@@ -7,7 +7,7 @@ Data
 ------
 
 The data used is a subset of the STAR public access data file
-which is available with the AER package for $R$.
+which is available with the `AER` package for $R$.
 Christian Kleiber and Achim Zeileis (2008). Applied Econometrics with $R$. New
 York: Springer-Verlag. ISBN 978-0-387-77316-2. 
 URL http://CRAN.R-project.org/package=AER
