@@ -1,3 +1,8 @@
+# Install and load AER package and open STAR data.
+install.packages('AER')
+library(AER)
+data(STAR)
+
 # Create data frame with 100 randomly selected cases and 8 variables.
 star <- STAR[sample(nrow(STAR),100),
              c('gender','ethnicity','readk','read1',
