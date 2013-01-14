@@ -116,11 +116,14 @@ Create Mplus code.
 *                   Mplus Code                 *
 ************************************************
 TITLE:  STAR analysis
+
 DATA:
     FILE IS "C:\Dropbox\3_Teaching\
-SPSS2MplusDemo\starMplus.dat";
-  VARIABLE:
-    NAMES ARE childId	readk	read1	mathk	math1	male	ethnic;
+    SPSS2MplusDemo\starMplus.dat";
+
+VARIABLE:
+    NAMES ARE childId	readk	read1	mathk
+    math1	male	ethnic;
     USEVARIABLES ARE readk-ethnic;
     MISSING ARE ALL (-99);
 ************************************************.
