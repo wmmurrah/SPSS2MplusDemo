@@ -7,12 +7,12 @@ Data
 ------
 
 The data used is a subset of the STAR public access data file
-which is available with the `AER` package for $R$.
-Christian Kleiber and Achim Zeileis (2008). Applied Econometrics with $R$. New
+which is available with the `AER` package for R.
+Christian Kleiber and Achim Zeileis (2008). Applied Econometrics with R. New
 York: Springer-Verlag. ISBN 978-0-387-77316-2. 
 URL http://CRAN.R-project.org/package=AER
 
-The create.star.R file contains $R$ code to create a data file similar to the one used in this demontration.
+The create.star.R file contains R code to create a data file similar to the one used in this demontration.
 
 Data files include a raw data file (star.csv), an SPSS file (star.sav) and a tab delimited file (star.dat), the latter of which can be used by Mplus.
 
