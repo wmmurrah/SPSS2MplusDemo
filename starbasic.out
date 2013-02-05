@@ -1,6 +1,6 @@
 Mplus VERSION 7
 MUTHEN & MUTHEN
-12/19/2012  12:40 PM
+02/05/2013   1:07 PM
 
 INPUT INSTRUCTIONS
 
@@ -62,7 +62,7 @@ Input data format  FREE
 
 SUMMARY OF DATA
 
-     Number of missing data patterns             7
+     Number of missing data patterns             6
 
 
 SUMMARY OF MISSING DATA PATTERNS
@@ -70,23 +70,22 @@ SUMMARY OF MISSING DATA PATTERNS
 
      MISSING DATA PATTERNS (x = not missing)
 
-           1  2  3  4  5  6  7
+           1  2  3  4  5  6
  READK     x  x  x
- READ1     x        x  x
- MATHK     x  x  x  x
- MATH1     x  x     x  x  x
- MALE      x  x  x  x  x  x  x
- WHITE     x  x  x  x  x  x  x
- BLACK     x  x  x  x  x  x  x
- HISP      x  x  x  x  x  x  x
+ READ1     x        x
+ MATHK     x  x  x
+ MATH1     x  x     x  x
+ MALE      x  x  x  x  x  x
+ WHITE     x  x  x  x  x  x
+ BLACK     x  x  x  x  x  x
+ HISP      x  x  x  x  x  x
 
 
      MISSING DATA PATTERN FREQUENCIES
 
     Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
-          1          34           4           1           7          25
-          2           2           5          24
-          3          13           6           1
+          1          36           3          11           5           2
+          2           1           4          17           6          33
 
 
 COVARIANCE COVERAGE OF DATA
@@ -100,14 +99,14 @@ Minimum covariance coverage value   0.100
            Covariance Coverage
               READK         READ1         MATHK         MATH1         MALE
               ________      ________      ________      ________      ________
- READK          0.490
- READ1          0.340         0.590
- MATHK          0.490         0.350         0.500
- MATH1          0.360         0.590         0.370         0.620
- MALE           0.490         0.590         0.500         0.620         1.000
- WHITE          0.490         0.590         0.500         0.620         1.000
- BLACK          0.490         0.590         0.500         0.620         1.000
- HISP           0.490         0.590         0.500         0.620         1.000
+ READK          0.480
+ READ1          0.360         0.530
+ MATHK          0.480         0.360         0.480
+ MATH1          0.370         0.530         0.370         0.560
+ MALE           0.480         0.530         0.480         0.560         1.000
+ WHITE          0.480         0.530         0.480         0.560         1.000
+ BLACK          0.480         0.530         0.480         0.560         1.000
+ HISP           0.480         0.530         0.480         0.560         1.000
 
 
            Covariance Coverage
@@ -121,20 +120,20 @@ Minimum covariance coverage value   0.100
 UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
 
     MALE
-      Category 1    0.400       40.000
-      Category 2    0.600       60.000
+      Category 1    0.480       48.000
+      Category 2    0.520       52.000
     WHITE
-      Category 1    0.390       39.000
-      Category 2    0.610       61.000
+      Category 1    0.370       37.000
+      Category 2    0.630       63.000
     BLACK
-      Category 1    0.620       62.000
-      Category 2    0.380       38.000
+      Category 1    0.660       66.000
+      Category 2    0.340       34.000
     HISP
       Category 1    0.990       99.000
       Category 2    0.010        1.000
 
 
-     WARNING:  THE SAMPLE CORRELATION OF BLACK AND WHITE IS -1.000
+     WARNING:  THE SAMPLE CORRELATION OF BLACK AND WHITE IS -0.992
      DUE TO ONE OR MORE ZERO CELLS IN THEIR BIVARIATE TABLE.
      INFORMATION FROM THESE VARIABLES CAN BE USED TO CREATE ONE NEW VARIABLE.
 
@@ -150,33 +149,33 @@ RESULTS FOR BASIC ANALYSIS
            MEANS/INTERCEPTS/THRESHOLDS
               READK         READ1         MATHK         MATH1         MALE$1
               ________      ________      ________      ________      ________
-      1       436.184       509.220       486.320       523.726        -0.253
+      1       440.625       527.887       480.667       534.232        -0.050
 
 
            MEANS/INTERCEPTS/THRESHOLDS
               WHITE$1       BLACK$1       HISP$1
               ________      ________      ________
-      1        -0.279         0.305         2.326
+      1        -0.332         0.412         2.326
 
 
            CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
               READK         READ1         MATHK         MATH1         MALE
               ________      ________      ________      ________      ________
- READK        987.652
- READ1          0.468      3727.464
- MATHK          0.786         0.523      2722.235
- MATH1          0.422         0.791         0.550      2630.340
- MALE          -0.314        -0.348        -0.119        -0.269
- WHITE          0.214         0.188        -0.017         0.210         0.094
- BLACK         -0.213        -0.188         0.017        -0.211        -0.054
- HISP           0.000         0.000         0.000         0.000        -0.098
+ READK        597.438
+ READ1          0.460      2669.437
+ MATHK          0.689         0.452      1944.165
+ MATH1          0.569         0.696         0.663      1724.593
+ MALE          -0.047        -0.007        -0.049         0.022
+ WHITE          0.089         0.473         0.157         0.544         0.016
+ BLACK         -0.089        -0.471        -0.154        -0.544        -0.047
+ HISP           0.000         0.000         0.000         0.000        -0.021
 
 
            CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
               WHITE         BLACK         HISP
               ________      ________      ________
- BLACK         -1.000
- HISP          -0.107         0.112
+ BLACK         -0.992
+ HISP          -0.127         0.152
 
 
      STANDARD ERRORS FOR ESTIMATED SAMPLE STATISTICS
@@ -185,33 +184,33 @@ RESULTS FOR BASIC ANALYSIS
            S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
               READK         READ1         MATHK         MATH1         MALE$1
               ________      ________      ________      ________      ________
-      1         5.171         9.356         8.030         7.133         0.127
+      1         4.437         7.100         6.526         5.841         0.125
 
 
            S.E. FOR MEANS/INTERCEPTS/THRESHOLDS
               WHITE$1       BLACK$1       HISP$1
               ________      ________      ________
-      1         0.127         0.127         0.373
+      1         0.128         0.129         0.373
 
 
            S.E. FOR CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
               READK         READ1         MATHK         MATH1         MALE
               ________      ________      ________      ________      ________
- READK        178.278
- READ1          0.106      1002.971
- MATHK          0.048         0.107       557.256
- MATH1          0.137         0.029         0.095       469.009
- MALE           0.176         0.143         0.166         0.142
- WHITE          0.137         0.162         0.181         0.162         0.160
- BLACK          0.136         0.162         0.181         0.162         0.161
- HISP           5.306         4.836         5.253         4.717         0.330
+ READK        125.280
+ READ1          0.127       644.950
+ MATHK          0.056         0.117       357.493
+ MATH1          0.107         0.068         0.106       314.551
+ MALE           0.184         0.174         0.181         0.170
+ WHITE          0.184         0.152         0.153         0.137         0.160
+ BLACK          0.180         0.156         0.150         0.137         0.162
+ HISP           5.361         5.102         5.361         4.964         0.332
 
 
            S.E. FOR CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
               WHITE         BLACK         HISP
               ________      ________      ________
  BLACK          0.000
- HISP           0.330         0.330
+ HISP           0.329         0.328
 
 
 DIAGRAM INFORMATION
@@ -220,8 +219,8 @@ DIAGRAM INFORMATION
   No diagram output was produced.
 
 
-     Beginning Time:  12:40:09
-        Ending Time:  12:40:09
+     Beginning Time:  13:07:24
+        Ending Time:  13:07:24
        Elapsed Time:  00:00:00
 
 
