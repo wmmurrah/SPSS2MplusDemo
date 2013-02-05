@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="SPSS2MplusDemo : Code accompanying SPSS2MPlusDemo post on williammurrah.com" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>SPSS2MplusDemo</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/wmmurrah/SPSS2MplusDemo">View on GitHub</a>
+
+          <h1 id="project_title">SPSS2MplusDemo</h1>
+          <h2 id="project_tagline">Code accompanying SPSS2MPlusDemo post on williammurrah.com</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/wmmurrah/SPSS2MplusDemo/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/wmmurrah/SPSS2MplusDemo/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>When I have to prepare data for Mplus, I use the <code>MplusAutomation</code> package in R. Its great! I import the SPSS data file into R with the <code>foreign</code> package. Then I use the <code>prepareMplusData()</code> function to create a .dat file for use in Mplus. This function also creates basic Mplus code that can pasted into Mplus or a text file used to prepare Mplus code files. <code>MplusAutomation</code> has many other great features and I highly recommend it for those who use Mplus and R.</p>
+
+<p>But many of my colleagues don't use R, and therefore this option is not feasible. Recently I gave an informal talk to some colleagues on how to get data from SPSS to Mplus, which I thought might be useful to others who needed to manually prepare SPSS data for Mplus. Here, I include the steps I recommended with links to an SPSS syntax example.</p>
+
+<p>Before describing the steps, I think it is important to point out the major differences between an SPSS data file and an Mplus data file. SPSS data files include variable names, variable labels and other information. They also may contain different types of variables including numeric, string, and date variables. Mplus data files are simply a tab delimited numeric matrix. No variable names and only numbers as data points. Variable names are supplied in the Mplus code and are not in the data file.</p>
+
+<h1>Basic Steps</h1>
+
+<p>The following 6 steps can be used to get SPSS data ready for Mplus:</p>
+
+<ol>
+<li> Make a copy of the SPSS data file </li>
+<li> recode any non-numeric variables you want to include in the Mplus data file</li>
+<li> rename variables longer than 8 characters</li>
+<li> deal with missingness values (if necessary)</li>
+<li> save SPSS data file as a tab delimited file (.dat)</li>
+<li> create basic code for Mplus</li>
+</ol><h2>1. Make a copy of the SPSS file</h2>
+
+<p>This step is pretty simple. It is a good idea to keep an original copy of your data file. That way you can always start over. I will be using an example data file that contains a subset of cases and variables from the STAR public access data set. This data can be found in the R package <code>AER</code>. If you have R you can use the following code to generate the data file:</p>
+
+<pre><code># Install and load AER package and open the STAR data.
+install.packages('AER')
+library(AER)
+data(STAR)
+
+# Create data frame with 100 randomly selected cases and 8 variables.
+set.seed(1234)
+star &lt;- STAR[sample(nrow(STAR),100),
+             c('gender','ethnicity','readk','read1','mathk','math1','school1','degreek')]
+names(star) &lt;- c('gender','ethnicity','readKindergarten','read1',
+             'mathKindergarten','math1','school1','degreek')
+# save R data frame as comma separated values file to be imported
+# into SPSS.
+write.csv(star,file="star.csv")
+# You can use the 'Read Text Data' menu option in SPSS to import this file into SPSS.
+</code></pre>
+
+<p>You can also find of copy of the SPSS file on my github page for this tutorial <a href="https://github.com/wmmurrah/SPSS2MplusDemo">here</a>. .</p>
+
+<h2>2. Recode any non-numeric variables</h2>
+
+<p>Mplus only handles numeric data. This does not mean you can't have categorical variables in your analyses, but they have to be coded with numbers. For example, the variable 'gender' in the star data frame consists of two string values: "female" and "male". We can recode these so females have a value of '0' and males have a value of '1'. The following SPSS syntax does the trick:</p>
+
+<pre><code>RECODE 
+gender
+('female' = 0)
+('male' = 1)
+(MISSING=SYSMIS)
+ into male.
+EXECUTE.
+</code></pre>
+
+<p>Notice that I also renamed the variable 'male' to indicate the category the variable identifies. If you run across a variable named 'gender' coded as '0's and '1's, you don't know which value signifies females and which males. By naming the binary variable 'male', I am indicating that '1's are males, therefore the '0's must be females. This is just good data management.</p>
+
+<h2>3. Rename variables longer than 8 characters</h2>
+
+<p>Mplus only recognizes the first 8 characters of variable names. If the first 8 characters of each of your variables are unique, you might be okay with Mplus truncating your variable names. But if you have variables in which the first 8 characters are not unique you can run into major problems. For example, if you had variables named 'kindergartenMath' and 'kindergartenRead', Mplus would treat them as having the same variable name. So don't overlook this step!</p>
+
+<p>The following SPSS code renames the long variables in the star data:</p>
+
+<pre><code>RENAME VARIABLES 
+(ChildIdentification = childId)
+(readKindergarten = readk)
+(mathKindergarten = mathk).
+</code></pre>
+
+<h2>4. Deal with missing values</h2>
+
+<p>There are two types of missing data possible in an SPSS data frame. System missing data is indicated by a period ('.'). You can also designate any numeric value as a user missing value (e.g. -99). You don't necessarily have to change these values to prepare your data for Mplus. But you must at least know which values indicate missingness for EACH variable. I also note that I have experienced some difficulty with the period ('.') value as a missing indicator when preparing SPSS data for Mplus. I usually recode all missing values to one numeric value (e.g. -99, or -999) that is not in the range of possible values for any of my data. Later you will have to tell Mplus what values indicate missing data for your variables. It is much easier if this value is one number, and it is the same for all variables. However, you may have good reason to have different missing values. Again, just know what your missingness indicators are.</p>
+
+<h2>5. Create a tab delimited file</h2>
+
+<p>Now that you have an SPSS file in order, you need to save it as a tab delimited file. To do this you just need to click on the 'File' option in the SPSS dataSet menu,and then click 'Save As'. In the 'Save as type:' menu on the resulting tab, select 'tab delimited (*.dat)'. <strong>MAKE SURE THE 'Write variable names to speadsheet' BOX IS NOT CHECKED!</strong> Mplus data files should only contain numbers. You can also use the 'Variables...' radio to select only the variables you need in Mplus. This is useful if you have non-numeric variables in the original data file that you don't want to use and therefore don't what to waste time transforming. Below is a snippet of SPSS syntax that resulted from the above procedure on the star data.</p>
+
+<pre><code>SAVE TRANSLATE OUTFILE='C:\Dropbox\3_Teaching\SPSS2MplusDemo\starMplus.dat'
+  /TYPE=TAB
+  /MAP
+  /REPLACE
+  /CELLS=VALUES.
+</code></pre>
+
+<h2>6. Create basic code for Mplus</h2>
+
+<p>Finally, you will want to create a basic set of code for Mplus that will be the basis of all your analyses used in Mplus. I will mention three things you want to make sure get into your Mplus code accurately. First, you need to include the path to your tab delimited file in the DATA section of your Mplus code file. Second, you want to make sure you have the variable names correct. Remember that Mplus data files only contain the numeric data. Variable names are assigned to each column of the tab delimited file with the VARIABLE command in the Mplus code file. To keep you from having to type in all the variable names, you can copy the column of variable names from the SPSS file (in Variable View) and paste them into EXCEL. Then use the transpose function in the 'paste special' menu to convert the column of names into a row of names. Then paste this row in the Mplus code file. Third, you need to tell Mplus what the missing data values are. Because I used -99 for the only missing value for ALL of my variales, the following code should be in the VARIABLE section of your Mplus code file:</p>
+
+<pre><code>MISSING ARE ALL (-99);
+</code></pre>
+
+<p>I will mention one final peculiarity of Mplus that can trip up this process. Mplus only reads the first 120 or so characters in the code file. So you may have to break up long rows into shorter rows. For example the file path and variable names often have to be broken up this way. If you don't Mplus will give you an error message.</p>
+
+<p>And that's it! You can download all the code files for this demonstration from my github page found <a href="https://github.com/wmmurrah/SPSS2MplusDemo">here</a>. The 'stars.sps' file contains all the syntax needed to complete this tutorial. You can click on the "Zip" radio button on this page to download all files.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">SPSS2MplusDemo maintained by <a href="https://github.com/wmmurrah">wmmurrah</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
