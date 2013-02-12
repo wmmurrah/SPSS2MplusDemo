@@ -1,6 +1,6 @@
 Mplus VERSION 7
 MUTHEN & MUTHEN
-02/05/2013   1:07 PM
+02/06/2013   3:40 PM
 
 INPUT INSTRUCTIONS
 
@@ -19,6 +19,7 @@ INPUT INSTRUCTIONS
     TYPE IS Basic;
 
   OUTPUT:  SAMPSTAT PATTERNS;
+  plot: type = plot1 plot2;
 
 
 
@@ -213,14 +214,22 @@ RESULTS FOR BASIC ANALYSIS
  HISP           0.329         0.328
 
 
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms of sample values
+  Scatterplots (sample values)
+  Sample proportions
+
 DIAGRAM INFORMATION
 
   Mplus diagrams are currently not available for TYPE=BASIC.
   No diagram output was produced.
 
 
-     Beginning Time:  13:07:24
-        Ending Time:  13:07:24
+     Beginning Time:  15:40:52
+        Ending Time:  15:40:52
        Elapsed Time:  00:00:00
 
 

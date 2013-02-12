@@ -13,3 +13,4 @@ ANALYSIS:
   TYPE IS Basic;
 
 OUTPUT:  SAMPSTAT PATTERNS;
+plot: type = plot1 plot2;
