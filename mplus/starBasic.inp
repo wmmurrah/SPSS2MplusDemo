@@ -5,10 +5,10 @@ DATA:
 
 VARIABLE:
   NAMES ARE childId	readk	read1	mathk	math1
-  male	white black hisp;
-  USEVARIABLES ARE readk-hisp;
+  male	white other;
+  USEVARIABLES ARE readk-other;
   MISSING ARE ALL (-99);
-  categorical are male-hisp;
+  categorical are male-other;
 ANALYSIS:
   TYPE IS Basic;
 
