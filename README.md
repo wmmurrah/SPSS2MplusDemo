@@ -1,7 +1,7 @@
 README
 ========
 
-These files contain data and code discussed in a blogpost on my website (www.williammurrah.com) in the post entitled "Preparing and SPSS data file for Mplus". You can also visit a permanent github page at http://wmmurrah.github.com/SPSS2MplusDemo/ that also contains the tutorial .
+These files contain data and code discussed in a blogpost on my website (www.statistical-thinking.com) in the post entitled "Preparing and SPSS data file for Mplus". You can also visit a permanent github page at http://wmmurrah.github.com/SPSS2MplusDemo/ that also contains the tutorial .
 
 Data
 ------
